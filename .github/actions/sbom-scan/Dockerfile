@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y curl ca-certifi
     curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin && \
     curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
+RUN ls /usr/local/bin
+
 COPY requirements.txt .
 
 CMD ["syft", "requirements.txt", "-o", "cyclonedx-json"]
