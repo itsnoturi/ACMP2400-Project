@@ -11,9 +11,9 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg-acme-tfstate"
-    storage_account_name = "stacp2460storageaccount"
-    container_name       = "big-tf-state-acp2460"
+    resource_group_name  = "rg-acme-final"
+    storage_account_name = "acmp2460storageaccount"
+    container_name       = "big-tf-state-acmp2400"
     use_azuread_auth     = true
   }
 }
@@ -23,7 +23,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_container_registry" "teacher-acr" {
-  name                = "acrteacheracp2460"
+  name                = "acrteacheracmp2400"
   resource_group_name = "rg-teacher"
   location            = "Central US"
   sku                 = "Basic"
@@ -31,7 +31,7 @@ resource "azurerm_container_registry" "teacher-acr" {
 }
 
 resource "azurerm_container_group" "teacher-aci" {
-  name                = "acgp-teacher-aci"
+  name                = "acmp-teacher-aci"
   location            = "Central US"
   resource_group_name = "rg-teacher"
   ip_address_type     = "Public"
@@ -40,7 +40,7 @@ resource "azurerm_container_group" "teacher-aci" {
 
   container {
     name   = "final"
-    image  = "acrteacheracp2460.azurecr.io/final:latest"
+    image  = "acrteacheracmp2400.azurecr.io/final:latest"
     cpu    = "0.5"
     memory = "1.5"
 
@@ -55,7 +55,7 @@ resource "azurerm_container_group" "teacher-aci" {
   }
 
   image_registry_credential {
-    server   = "acrteacheracp2460.azurecr.io"
+    server   = "acrteacheracmp2400.azurecr.io"
     username = var.ARM_CLIENT_ID
     password = var.ARM_CLIENT_SECRET
   }
