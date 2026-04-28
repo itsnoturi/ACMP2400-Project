@@ -1,0 +1,28 @@
+name: 'Terraform container actions'
+description: 'Terraform action for demonstrations'
+author: jmcshannon@
+inputs:
+  ARM_CLIENT_ID:
+    description: 'Az client id'
+    required: true
+  ARM_CLIENT_SECRET:
+    description: 'Azure client secret'
+    required: true
+  ARM_SUBSCRIPTION_ID:
+    description: 'Azure subscription ID'
+    required: true
+  ARM_TENANT_ID:
+    description: 'Azure Tenant id'
+    required: true
+  STATE_KEY:
+    description: 'Unique value to identify your state slice'
+    required: true
+  TF_STAGE:
+    description: 'The terraform directory to use in the planning/apply phase'
+    required: true
+  DJANGO_SECRET_KEY_PROD:
+    description: 'The secret key for django to startup'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
