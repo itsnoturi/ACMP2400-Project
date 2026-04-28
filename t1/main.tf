@@ -19,8 +19,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_container_registry" "teacher-acr" {
-  name = "acrteacheracmp2400"
-  resource_group_name = "rg-teacher"
+  name = "acrcuridilacmp2400"
+  resource_group_name = "rg-curidil"
   location = "Central US"
   sku = "Basic"
   admin_enabled = false
