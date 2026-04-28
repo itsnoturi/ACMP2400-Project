@@ -7,9 +7,9 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg-acme-tfstate"
-    storage_account_name = "stacp2460storageaccount"
-    container_name       = "big-tf-state-acp2460"
+    resource_group_name  = "rg-acmp-final"
+    storage_account_name = "acmp2400storageaccount"
+    container_name       = "big-tf-state-acmp2400"
     use_azuread_auth     = true
   }
 }
