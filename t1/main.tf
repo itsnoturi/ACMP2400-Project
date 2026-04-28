@@ -7,8 +7,8 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg-acme-tfstate"
-    storage_account_name = "stacp2400storageaccount"
+    resource_group_name  = "rg-acmp-final"
+    storage_account_name = "acmp2400storageaccount"
     container_name       = "big-tf-state-acp2400"
     use_azuread_auth     = true
   }
@@ -19,7 +19,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_container_registry" "teacher-acr" {
-  name                = "acrteacheracp2400"
+  name                = "acrteacheracmp2400"
   resource_group_name = "rg-teacher"
   location            = "Central US"
   sku                 = "Basic"
