@@ -11,7 +11,7 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg-acme-final"
+    resource_group_name  = "rg-acmp-final"
     storage_account_name = "acmp2400storageaccount"
     container_name       = "big-tf-state-acmp2400"
     use_azuread_auth     = true
