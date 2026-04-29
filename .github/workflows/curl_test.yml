@@ -110,3 +110,24 @@ jobs:
           prefix=$(grep 'dns_name_label' main.tf | cut -d '=' -f2 | tr -d '"' | xargs)
           sleep 50
           curl -f http://$prefix.centralus.azurecontainer.io:8000
+
+  stage3-the-destroyer:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - name: get_code
+        uses: actions/checkout@v4
+
+      - name: destroy_t2
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          TF_VAR_ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          TF_VAR_DJANGO_SECRET_KEY_PROD: ${{ secrets.DJANGO_SECRET_KEY_PROD }}
+        run: |
+          cd t2
+          terraform init -backend-config="key=curidil.tfstate"
+          terraform destroy -auto-approve
