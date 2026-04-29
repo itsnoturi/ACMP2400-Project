@@ -118,6 +118,10 @@ jobs:
       - name: get_code
         uses: actions/checkout@v4
 
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v3
+
+
       - name: destroy_t2
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
