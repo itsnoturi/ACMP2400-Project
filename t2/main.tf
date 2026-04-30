@@ -13,8 +13,8 @@ terraform {
   backend "azurerm" {
     resource_group_name  = "rg-acmp-final"
     storage_account_name = "acmp2400storageaccount"
-    container_name       = "big-tf-state-acmp2400"
-    use_azuread_auth     = true
+    container_name = "big-tf-state-acmp2400"
+    use_azuread_auth = true
   }
 }
 
@@ -23,29 +23,29 @@ provider "azurerm" {
 }
 
 resource "azurerm_container_registry" "teacher-acr" {
-  name                = "acrcuridilacmp2400"
+  name = "acrcuridilacmp2400"
   resource_group_name = "rg-curidil"
-  location            = "Central US"
-  sku                 = "Basic"
-  admin_enabled       = false
+  location = "Central US"
+  sku = "Basic"
+  admin_enabled = false
 }
 
 resource "azurerm_container_group" "teacher-aci" {
-  name                = "acmp-curidil-aci"
-  location            = "Central US"
+  name = "acmp-curidil-aci"
+  location = "Central US"
   resource_group_name = "rg-curidil"
-  ip_address_type     = "Public"
-  dns_name_label      = "acmp-curidil-instance"
-  os_type             = "Linux"
+  ip_address_type = "Public"
+  dns_name_label = "acmp-curidil-instance"
+  os_type = "Linux"
 
   container {
-    name   = "final"
-    image  = "acrcuridilacmp2400.azurecr.io/final:latest"
-    cpu    = "0.5"
+    name = "final"
+    image = "acrcuridilacmp2400.azurecr.io/final:latest"
+    cpu = "0.5"
     memory = "1.5"
 
     ports {
-      port     = 8000
+      port = 8000
       protocol = "TCP"
     }
 
@@ -55,7 +55,7 @@ resource "azurerm_container_group" "teacher-aci" {
   }
 
   image_registry_credential {
-    server   = "acrcuridilacmp2400.azurecr.io"
+    server = "acrcuridilacmp2400.azurecr.io"
     username = var.ARM_CLIENT_ID
     password = var.ARM_CLIENT_SECRET
   }
